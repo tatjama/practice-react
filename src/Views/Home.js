@@ -1,40 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-
+import React  from 'react';
+//Hooks
+import {useAxiosGet} from '../Hooks/HttpRequest';
+//Components
 import Loader from '../Components/Loader';
 import ProductCard from '../Components/ProductCard';
 
-function Home(){
-    const[products, setProducts] = useState({
-        loading: false,
-        data: null,
-        error: false,
-    });
-    
+function Home(){    
     const url = `https://612b855922bb490017893b72.mockapi.io/products?page=1&&limit=10`;
     
-    useEffect(() => {
-        setProducts({
-            loading: true,
-            data: null,
-            error: false,
-        })
-        axios.get(url).then((response) =>{
-            setProducts({
-                loading: false,
-                data: response.data,
-                error: false,
-            })
-        }).catch(() =>{
-            setProducts({
-                loading: false,
-                data: null,
-                error: true,
-            })
-        })
-    },[url])
+    let products = useAxiosGet(url);
 
     let content = null;
+    
     if(products.error){
         content = <div>
             Hmmm, think that something gone wrong, please try again...
