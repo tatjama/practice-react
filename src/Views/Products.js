@@ -5,6 +5,7 @@ import {useAxiosGet} from '../Hooks/HttpRequest';
 import Loader from '../Components/Loader';
 import ProductCard from '../Components/ProductCard';
 import Pagination from '../Components/Pagination';
+import Select from '../Components/Select';
 
 function Products(){    
     const url = `https://612b855922bb490017893b72.mockapi.io/products/`;
@@ -28,20 +29,9 @@ function Products(){
     
     if(productList.data){
 
-        chooseProductsPerPageDropDown = <form >
-            <label htmlFor ="productsPerPage">Choose Products per page
-                <select 
-                type = "number" 
-                value = {productsPerPage}  
-                onChange={(event) => setProductsPerPage(event.target.value)} 
-                 className = "pl-10 pr-10 m-2" >
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>    
-                </select>
-            </label>
-        </form>
+        chooseProductsPerPageDropDown = <div >
+            <Select  productsPerPage = {productsPerPage} setProductsPerPage = {setProductsPerPage}/>
+        </div>
 
         const paginate = (page) => setCurrentPage(page)
         const numberOfPages = Array( Math.ceil(productList.data.length / productsPerPage)).fill(0)
