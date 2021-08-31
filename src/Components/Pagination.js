@@ -1,18 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 function Pagination({numberOfPages, paginate}){
+    const [activeIndex, setActiveIndex] = useState(1);
+
     const pagination = numberOfPages.map(page => {
+        
             return(                
                 <li 
-                    className = "m-2 text-blue-500"
+                    className = "m-2 text-blue-500 "
+                    id = {`page${page}`}
                     key={`page${page}`}
-                    onClick = {() => paginate(page) }
+                    onClick = {() => {
+                        paginate(page)
+                        setActiveIndex(page)
+                    } }
                 >
-                    {page}
+                   <span className={activeIndex === page? "active": null}> {page}</span>
                 </li>
             )
         })
-        
+
     return(
         <>
             {pagination}

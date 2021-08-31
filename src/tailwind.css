@@ -29872,6 +29872,10 @@ video {
   -webkit-animation: spin 2s infinite;
 }
 
+.active{
+  color:red;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
