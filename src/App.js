@@ -5,6 +5,7 @@ import Header from './Components/Header';
 import Home from './Views/Home';
 import About from './Views/About';
 import Product from './Views/Product';
+import Products from './Views/Products';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
             </Route>
             <Route path="/products/:id">
               <Product/>
+            </Route>
+            <Route exact path="/products">
+              <Products/>
             </Route>
           </Switch>
         </div>
