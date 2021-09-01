@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-
+//Hooks
 import {useAxiosGet} from '../Hooks/HttpRequest';
-
+//Components
 import Loader from '../Components/Loader';
 import ProductCard from '../Components/ProductCard';
 import Pagination from '../Components/Pagination';
@@ -14,9 +14,7 @@ function Products(){
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(10);
     const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    
-    
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;       
     
     let content = null;
     let pagination = null;
@@ -26,6 +24,9 @@ function Products(){
         content = <Loader/>
     }
 
+    if(productList.error){
+        content = <div> There was an error...Tray again later</div>
+    }
     
     if(productList.data){
 
@@ -42,20 +43,16 @@ function Products(){
                       </ul>
 
         const currentProducts = productList.data.slice(indexOfFirstProduct, indexOfLastProduct);
-        console.log(currentProducts)
+
         content = currentProducts.map((product) =>{
-            return (
-                
+            return (                
                     <div key = {product.id}>
                         <ProductCard product={product}/>
                     </div>
                 )
         }); 
     }
-
-    if(productList.error){
-        content = <div> There was an error...Tray again later</div>
-    }
+    
     return(
         <div>
            <h1 className="mb-10 text-center text-2xl"> List of Products</h1>   

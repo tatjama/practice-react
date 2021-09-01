@@ -1,13 +1,18 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 //Hooks
 import {useAxiosGet} from '../Hooks/HttpRequest';
 //Components
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 import Loader from '../Components/Loader';
 
 function Product(){    
     const { id } = useParams();
     const url = `https://612b855922bb490017893b72.mockapi.io/products/${id}`;
+
+    const history = useHistory();
+    
     let content = null;
 
     let product = useAxiosGet(url);
@@ -43,6 +48,10 @@ function Product(){
     
     return(
         <div>
+            <button onClick={() => history.goBack()} className =" mb-5" >
+                <FontAwesomeIcon icon = {faChevronLeft}/> Back
+                
+            </button>
             {content}
         </div>
     )
